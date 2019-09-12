@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 02, 2019 at 09:38 PM
+-- Generation Time: Sep 12, 2019 at 08:23 PM
 -- Server version: 5.7.27-0ubuntu0.19.04.1
 -- PHP Version: 7.2.19-0ubuntu0.19.04.2
 
@@ -299,15 +299,16 @@ CREATE TABLE `users` (
   `country_id` int(10) NOT NULL,
   `ip` varchar(20) DEFAULT NULL,
   `date_req` datetime DEFAULT NULL,
-  `token` varchar(255) DEFAULT NULL
+  `token` varchar(255) DEFAULT NULL,
+  `status` smallint(2) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `country_id`, `ip`, `date_req`, `token`) VALUES
-(1, 'dmozar@gmail.com', '71f8aaa3942fdb0752a2c1bd1464324c', 'Damir', 'Mozar', 193, '127.0.0.1', '2019-09-01 20:00:00', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRtb3phckBnbWFpbC5jb20iLCJpZCI6MSwiaWF0IjoxNTY3NDQ4NTcxfQ.riknYi-cRP_om16ZLo3Sjo_YQK5QvXa8c-NdUI2ozNQ');
+INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `country_id`, `ip`, `date_req`, `token`, `status`) VALUES
+(1, 'dmozar@gmail.com', '71f8aaa3942fdb0752a2c1bd1464324c', 'Damir', 'Mozar', 193, '127.0.0.1', '2019-09-01 20:00:00', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRtb3phckBnbWFpbC5jb20iLCJpZCI6MSwiaWF0IjoxNTY3NDQ4NTcxfQ.riknYi-cRP_om16ZLo3Sjo_YQK5QvXa8c-NdUI2ozNQ', 1);
 
 --
 -- Indexes for dumped tables
