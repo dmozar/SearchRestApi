@@ -78,8 +78,7 @@ export default class UserModel {
                         req.query.email, 
                         passHash 
                     ], (err, result) => {
-
-                        if(result){
+                        if(result.length){
                             result = result[0];
                             resolve({status:true, user: this._format_result(result)});
                         } else {
@@ -98,8 +97,7 @@ export default class UserModel {
                     [
                         req.query.token, 
                     ], (err, result) => {
-
-                        if(result){
+                        if(result.length){
                             result = result[0];
                             resolve({status:true, user: this._format_result(result)});
                         } else {
@@ -116,7 +114,7 @@ export default class UserModel {
 
 
     _format_result(result){
-
+        console.log(result)
         var u = {
             id: result.id,
             email: result.email,
