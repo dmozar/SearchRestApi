@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 12, 2019 at 08:23 PM
+-- Generation Time: Sep 12, 2019 at 09:12 PM
 -- Server version: 5.7.27-0ubuntu0.19.04.1
 -- PHP Version: 7.2.19-0ubuntu0.19.04.2
 
@@ -287,6 +287,30 @@ INSERT INTO `countries` (`id`, `country_code`, `country_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `terms`
+--
+
+CREATE TABLE `terms` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `term` varchar(45) NOT NULL COMMENT 'Name of term',
+  `taxonomy` varchar(80) NOT NULL COMMENT 'Uniq key of term',
+  `options` longtext COMMENT 'Term options (json,value, string...)',
+  `description` longtext COMMENT 'Literal description for term',
+  `status` smallint(2) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `terms`
+--
+
+INSERT INTO `terms` (`id`, `term`, `taxonomy`, `options`, `description`, `status`) VALUES
+(1, 'User APIs', 'User-1', '{\"Module-1\",\"Module-2\"}', 'Defined API modules for current user.', 0),
+(2, 'Search API', 'Module-1', '{\"icon\":\"<i class=\"la la-search\"></i>\"}', '<h1>BUILDING BLOCKSFOR CREATING GREAT SEARCH</h1>\r\n<p>A powerful hosted search API that provides product teams with the resources & tools they need to create fast, relevant search.</p>', 0),
+(3, 'Recommended API', 'Module-2', '{\"icon\":\"<i class=\"la la-crosshairs\"></i>\"}', '<h1>Product Recommendation API</h1>\r\n<p>With the product recommendations API, smart recommendations will be shown on the store\'s product pages. This will help the merchant’s customers discover more products with a better browsing experience, which can help boost sales.</p>', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -321,6 +345,13 @@ ALTER TABLE `countries`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `terms`
+--
+ALTER TABLE `terms`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `taxonomy` (`taxonomy`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -336,6 +367,11 @@ ALTER TABLE `users`
 --
 ALTER TABLE `countries`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=247;
+--
+-- AUTO_INCREMENT for table `terms`
+--
+ALTER TABLE `terms`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users`
 --
