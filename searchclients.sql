@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 12, 2019 at 09:12 PM
+-- Generation Time: Sep 15, 2019 at 09:05 PM
 -- Server version: 5.7.27-0ubuntu0.19.04.1
--- PHP Version: 7.2.19-0ubuntu0.19.04.2
+-- PHP Version: 7.3.9-1+ubuntu19.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -292,6 +292,7 @@ INSERT INTO `countries` (`id`, `country_code`, `country_name`) VALUES
 
 CREATE TABLE `terms` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `groupkey` varchar(45) DEFAULT NULL,
   `term` varchar(45) NOT NULL COMMENT 'Name of term',
   `taxonomy` varchar(80) NOT NULL COMMENT 'Uniq key of term',
   `options` longtext COMMENT 'Term options (json,value, string...)',
@@ -303,10 +304,10 @@ CREATE TABLE `terms` (
 -- Dumping data for table `terms`
 --
 
-INSERT INTO `terms` (`id`, `term`, `taxonomy`, `options`, `description`, `status`) VALUES
-(1, 'User APIs', 'User-1', '{\"Module-1\",\"Module-2\"}', 'Defined API modules for current user.', 0),
-(2, 'Search API', 'Module-1', '{\"icon\":\"<i class=\"la la-search\"></i>\"}', '<h1>BUILDING BLOCKSFOR CREATING GREAT SEARCH</h1>\r\n<p>A powerful hosted search API that provides product teams with the resources & tools they need to create fast, relevant search.</p>', 0),
-(3, 'Recommended API', 'Module-2', '{\"icon\":\"<i class=\"la la-crosshairs\"></i>\"}', '<h1>Product Recommendation API</h1>\r\n<p>With the product recommendations API, smart recommendations will be shown on the store\'s product pages. This will help the merchant’s customers discover more products with a better browsing experience, which can help boost sales.</p>', 0);
+INSERT INTO `terms` (`id`, `groupkey`, `term`, `taxonomy`, `options`, `description`, `status`) VALUES
+(1, 'User APIs', 'User APIs', 'User-1', '{\"Module-1\",\"Module-2\"}', 'Defined API modules for current user.', 1),
+(2, 'API', 'Search API', 'Module-1', '{\"icon\":\"<i class=\"la la-search\"></i>\"}', '<h2>Site search</h2>\n<p>A powerful hosted search API that provides product teams with the resources & tools they need to create fast, relevant search.</p>', 1),
+(3, 'API', 'Recommended API', 'Module-2', '{\"icon\":\"<i class=\"la la-crosshairs\"></i>\"}', '<h2>Product Recommendation API</h2>\n<p>With the product recommendations API, smart recommendations will be shown on the store\'s product pages. This will help the merchant’s customers discover more products with a better browsing experience, which can help boost sales.</p>', 1);
 
 -- --------------------------------------------------------
 

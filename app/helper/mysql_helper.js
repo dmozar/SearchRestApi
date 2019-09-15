@@ -6,7 +6,7 @@ export const MysqlHelper = {
         'host':         'localhost',
         'database':     'searchclients',
         'user':         'root',
-        'password':     '',
+        'password':     'Dexilo2dexilo.',
         'charset':      'utf8'
     },
 

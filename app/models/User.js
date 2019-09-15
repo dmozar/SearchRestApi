@@ -78,13 +78,16 @@ export default class UserModel {
                         req.query.email, 
                         passHash 
                     ], (err, result) => {
-                        if(result.length){
-                            result = result[0];
-                            resolve({status:true, user: this._format_result(result)});
+                        if(result === undefined){
+                            resolve({status:false});
                         } else {
-                            resolve({status:false})
+                            if(result.length){
+                                result = result[0];
+                                resolve({status:true, user: this._format_result(result)});
+                            } else {
+                                resolve({status:false})
+                            }
                         }
-                        
                     }
                 );
 
