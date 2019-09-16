@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 15, 2019 at 09:05 PM
+-- Generation Time: Sep 16, 2019 at 04:38 AM
 -- Server version: 5.7.27-0ubuntu0.19.04.1
 -- PHP Version: 7.3.9-1+ubuntu19.04.1+deb.sury.org+1
 
@@ -306,8 +306,9 @@ CREATE TABLE `terms` (
 
 INSERT INTO `terms` (`id`, `groupkey`, `term`, `taxonomy`, `options`, `description`, `status`) VALUES
 (1, 'User APIs', 'User APIs', 'User-1', '{\"Module-1\",\"Module-2\"}', 'Defined API modules for current user.', 1),
-(2, 'API', 'Search API', 'Module-1', '{\"icon\":\"<i class=\"la la-search\"></i>\"}', '<h2>Site search</h2>\n<p>A powerful hosted search API that provides product teams with the resources & tools they need to create fast, relevant search.</p>', 1),
-(3, 'API', 'Recommended API', 'Module-2', '{\"icon\":\"<i class=\"la la-crosshairs\"></i>\"}', '<h2>Product Recommendation API</h2>\n<p>With the product recommendations API, smart recommendations will be shown on the store\'s product pages. This will help the merchant’s customers discover more products with a better browsing experience, which can help boost sales.</p>', 1);
+(2, 'API', 'Search API', 'Module-1', '{\"icon\":\"<i class=\\\"fa fa-search\\\"></i>\"}', '<h2>Site search</h2>\n<p>A powerful hosted search API that provides product teams with the resources & tools they need to create fast, relevant search.</p>', 1),
+(3, 'API', 'Recommended API', 'Module-2', '{\"icon\":\"<i class=\\\"fa fa-crosshairs\\\"></i>\"}', '<h2>Product Recommendation API</h2>\n<p>With the product recommendations API, smart recommendations will be shown on the store\'s product pages. This will help the merchant’s customers discover more products with a better browsing experience, which can help boost sales.</p>', 1),
+(4, 'Page', 'API Page', 'API-Page', NULL, '<h1>API`s</h1>\r\n<p>Select api</p>', 1);
 
 -- --------------------------------------------------------
 
@@ -372,7 +373,7 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `terms`
 --
 ALTER TABLE `terms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `users`
 --
