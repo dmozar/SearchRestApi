@@ -31,8 +31,9 @@ export default class PageModel {
 
             if(req.query.taxonomy !== undefined){
 
-                conn.query('SELECT * FROM terms t WHERE t.taxonomy=? AND t.status=1 LIMIT 1', 
+                conn.query('SELECT * FROM terms t WHERE t.taxonomy=? OR slug=? AND t.status=1 LIMIT 1', 
                     [
+                        req.query.taxonomy,
                         req.query.taxonomy
 
                     ], (err, result) => {

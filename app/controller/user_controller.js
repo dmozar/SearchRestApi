@@ -2,7 +2,7 @@ import UserModel from './../models/User';
 
 exports.find = function(req, res) {
     var model = new UserModel();
-    model.find(req).then((user)=>{ res.status(200).send( user ); })
+    model.find(req,res).then((user)=>{ res.status(200).send( user ); })
     
 };
 

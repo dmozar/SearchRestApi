@@ -2,7 +2,7 @@ import express from 'express';
 import routes from './routes';
 
 const app = express();
-
+var cookieParser = require('cookie-parser');
 
 
 
@@ -26,12 +26,56 @@ app.use(function (req, res, next) {
     next();
 });
 
+var session = require('express-session');
+
+
+app.use(cookieParser());
+
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'idiokratija',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false, maxAge: 60000 }
+}))
+
+// destroy session
+/* req.session.destroy(function(err) {
+  // cannot access session here
+}) */
+
 
 // middleware to use for all requests
 app.use(function(req, res, next) {
-    // do logging
-    console.log('Something is happening.');
-    next(); // make sure we go to the next routes and don't stop here
+
+      var sesApi = session.sesApi;
+      console.log(sesApi + "!==" + req.query.key)
+    
+    if (sesApi === undefined && req._parsedUrl.pathname !== '/user/find')
+    {
+      res.status(400).send({
+            success: 'false',
+            message: 'Session is not valid!',
+      });
+      res.end();
+    } else {
+      if(req._parsedUrl.pathname !== '/user/find'){
+      
+        if(sesApi !== req.query.key){
+          res.status(400).send({
+                success: 'false',
+                message: 'Session is not valid!!',
+          });
+          res.end();
+        } else {
+          console.log('Something is happening.');
+          next()
+        }
+      } else {
+        console.log('Something is happening 2.');
+        next();
+      }
+    }
 });
 
 
