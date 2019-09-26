@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 19, 2019 at 08:49 PM
+-- Generation Time: Sep 26, 2019 at 05:44 AM
 -- Server version: 5.7.27-0ubuntu0.19.04.1
 -- PHP Version: 7.2.19-0ubuntu0.19.04.2
 
@@ -292,6 +292,7 @@ INSERT INTO `countries` (`id`, `country_code`, `country_name`) VALUES
 
 CREATE TABLE `terms` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `parent_id` bigint(20) UNSIGNED DEFAULT NULL,
   `groupkey` varchar(45) DEFAULT NULL,
   `term` varchar(45) NOT NULL COMMENT 'Name of term',
   `taxonomy` varchar(80) NOT NULL COMMENT 'Uniq key of term',
@@ -305,11 +306,12 @@ CREATE TABLE `terms` (
 -- Dumping data for table `terms`
 --
 
-INSERT INTO `terms` (`id`, `groupkey`, `term`, `taxonomy`, `options`, `description`, `slug`, `status`) VALUES
-(1, 'User APIs', 'User APIs', 'User-1', '{\"Module-1\",\"Module-2\"}', 'Defined API modules for current user.', NULL, 1),
-(2, 'API', 'Search API', 'Module-1', '{\"icon\":\"<i class=\\\"fa fa-search\\\"></i>\"}', '<h2>Site search</h2>\n<p>A powerful hosted search API that provides product teams with the resources & tools they need to create fast, relevant search.</p>', '/api/search', 1),
-(3, 'API', 'Recommended API', 'Module-2', '{\"icon\":\"<i class=\\\"fa fa-crosshairs\\\"></i>\"}', '<h2>Product Recommendation API</h2>\n<p>With the product recommendations API, smart recommendations will be shown on the store\'s product pages. This will help the merchant’s customers discover more products with a better browsing experience, which can help boost sales.</p>', '/api/recommended', 1),
-(4, 'Page', 'API Page', 'API-Page', NULL, '<h1>API`s</h1>\n<p>\"This powerful, all-in-one solution combines search, personalization, and merchandising capability. It also boasts Europe’s leading, error-tolerant conversion engine, which boosts conversions and decreases bounce rates significantly.\"</p>', NULL, 1);
+INSERT INTO `terms` (`id`, `parent_id`, `groupkey`, `term`, `taxonomy`, `options`, `description`, `slug`, `status`) VALUES
+(1, NULL, 'User APIs', 'User APIs', 'User-1', '{[\"Module-1\",\"Module-2\"]}', 'Defined API modules for current user.', NULL, 1),
+(2, NULL, 'API', 'Search API', 'Module-1', '{\"icon\":\"<i class=\\\"fa fa-search\\\"></i>\"}', '<h2>Site search</h2>\n<p>A powerful hosted search API that provides product teams with the resources & tools they need to create fast, relevant search.</p>', '/api/search', 1),
+(3, NULL, 'API', 'Recommended API', 'Module-2', '{\"icon\":\"<i class=\\\"fa fa-crosshairs\\\"></i>\"}', '<h2>Product Recommendation API</h2>\n<p>With the product recommendations API, smart recommendations will be shown on the store\'s product pages. This will help the merchant’s customers discover more products with a better browsing experience, which can help boost sales.</p>', '/api/recommended', 1),
+(4, NULL, 'Page', 'API Page', 'API-Page', '{}', '<h1>API`s</h1>\n<p>\"This powerful, all-in-one solution combines search, personalization, and merchandising capability. It also boasts Europe’s leading, error-tolerant conversion engine, which boosts conversions and decreases bounce rates significantly.\"</p>', NULL, 1),
+(5, 2, 'ApiSearchNavigation', 'Options', 'Search-Options', '{\"items\": [{\"title\":\"Configure Server\",\"link\":\"/api/search/configure-server\"},{\"title\":\"Configure Search\",\"link\":\"/api/search/configure-search\"}],\"status\": true,\"options\": {\"position\":\"sidebar\",\"handler\":\"Navigation\"}}', '<h1>Configure Search Server</h1>', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -353,7 +355,8 @@ ALTER TABLE `countries`
 ALTER TABLE `terms`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `taxonomy` (`taxonomy`),
-  ADD UNIQUE KEY `slug` (`slug`);
+  ADD UNIQUE KEY `slug` (`slug`),
+  ADD KEY `parent_id` (`parent_id`);
 
 --
 -- Indexes for table `users`
@@ -375,12 +378,22 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `terms`
 --
 ALTER TABLE `terms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `terms`
+--
+ALTER TABLE `terms`
+  ADD CONSTRAINT `termParentFk` FOREIGN KEY (`parent_id`) REFERENCES `terms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
