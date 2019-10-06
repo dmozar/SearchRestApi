@@ -1,8 +1,9 @@
 import UserModel from './../models/User';
+import { MysqlHelper } from '../helper/mysql_helper';
 
 exports.find = function(req, res) {
     var model = new UserModel();
-    model.find(req,res).then((user)=>{ res.status(200).send( user ); })
+    model.find(req,res).then((user)=>{ res.status(200).send( user ); MysqlHelper.close(); })
     
 };
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 26, 2019 at 05:44 AM
+-- Generation Time: Oct 06, 2019 at 09:57 PM
 -- Server version: 5.7.27-0ubuntu0.19.04.1
 -- PHP Version: 7.2.19-0ubuntu0.19.04.2
 
@@ -311,7 +311,12 @@ INSERT INTO `terms` (`id`, `parent_id`, `groupkey`, `term`, `taxonomy`, `options
 (2, NULL, 'API', 'Search API', 'Module-1', '{\"icon\":\"<i class=\\\"fa fa-search\\\"></i>\"}', '<h2>Site search</h2>\n<p>A powerful hosted search API that provides product teams with the resources & tools they need to create fast, relevant search.</p>', '/api/search', 1),
 (3, NULL, 'API', 'Recommended API', 'Module-2', '{\"icon\":\"<i class=\\\"fa fa-crosshairs\\\"></i>\"}', '<h2>Product Recommendation API</h2>\n<p>With the product recommendations API, smart recommendations will be shown on the store\'s product pages. This will help the merchant’s customers discover more products with a better browsing experience, which can help boost sales.</p>', '/api/recommended', 1),
 (4, NULL, 'Page', 'API Page', 'API-Page', '{}', '<h1>API`s</h1>\n<p>\"This powerful, all-in-one solution combines search, personalization, and merchandising capability. It also boasts Europe’s leading, error-tolerant conversion engine, which boosts conversions and decreases bounce rates significantly.\"</p>', NULL, 1),
-(5, 2, 'ApiSearchNavigation', 'Options', 'Search-Options', '{\"items\": [{\"title\":\"Configure Server\",\"link\":\"/api/search/configure-server\"},{\"title\":\"Configure Search\",\"link\":\"/api/search/configure-search\"}],\"status\": true,\"options\": {\"position\":\"sidebar\",\"handler\":\"Navigation\"}}', '<h1>Configure Search Server</h1>', NULL, 1);
+(5, 2, 'ApiSearchNavigation', 'Options', 'Search-Options', '{\"items\": [{\"title\":\"Configure Server\",\"link\":\"/api/search/configure-server\"},{\"title\":\"Configure Search\",\"link\":\"/api/search/configure-search\"}],\"status\": true,\"options\": {\"position\":\"sidebar\",\"handler\":\"Navigation\"}}', '<h1>Configure Search Server</h1>', NULL, 1),
+(6, NULL, 'ConfigureServer', 'Configure Server', 'Configuration', '{}', '<h1>Server Configuration</h1>\r\n<p>Please follow the instructions</p>', '/api/search/configure-server', 1),
+(7, 6, 'ApiSearchNavigation', 'Options', 'Server-Configuration-Options', '{\"items\": [{\"title\":\"Configure Server\",\"link\":\"/api/search/configure-server\",\"class\":\"active\"},{\"title\":\"Configure Search\",\"link\":\"/api/search/configure-search\"}],\"status\": true,\"options\": {\"position\":\"sidebar\",\"handler\":\"Navigation\"}}', NULL, NULL, 1),
+(9, NULL, 'ConfigureSearch', 'Configure Search', 'ConfigurationSearch', '{}', '<h1>Search Configuration</h1>\r\n<p>Please follow the instructions</p>\r\n\r\n{{FormSearchConfiguration}}', '/api/search/configure-search', 1),
+(10, 9, 'ApiSearchNavigation', 'Options', 'Search-Configuration-Options', '{\"items\": [{\"title\":\"Configure Server\",\"link\":\"/api/search/configure-server\"},{\"title\":\"Configure Search\",\"link\":\"/api/search/configure-search\",\"class\":\"active\"}],\"status\": true,\"options\": {\"position\":\"sidebar\",\"handler\":\"Navigation\"}}', NULL, NULL, 1),
+(11, NULL, 'Form', 'Form Configurquration', 'FormSearchConfiguration', '{\"handler\":\"Form\",\"state\":{\"values\":{\"formdata\":\"{{searchConf-[@user_id]}}\"},\"selectList\":\"{{serverList}}\"},\"items\":{\"search_name\":{\"type\":\"FormText\",\"attr\":{\"maxLength\":200,\"required\":true, \"className\":\"short\"},\"label\":\"Connection Name\",\"description\":\"Enter your connection name alias\"},\"prices\":{\"type\":\"GroupForm\",\"items\":{\"price\":{\"type\":\"FormText\",\"attr\":{\"maxLength\":10,\"className\":\"fix200\"},\"label\":\"Price\",\"description\":\"Add price\"},\"discount\":{\"type\":\"FormText\",\"attr\":{\"maxLength\":2,\"className\":\"small\",\"placeholder\":\"0%\"},\"description\":\"Add discount\"}}}}}', '<div class=\"page-section-title\">Basic server data</div>\r\n<p>Please provide your server data</p>', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -378,7 +383,7 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `terms`
 --
 ALTER TABLE `terms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `users`
 --

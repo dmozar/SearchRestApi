@@ -38,9 +38,11 @@ export default class PageModel {
 
         return new Promise((resolve)=>{
 
-            var conn = MysqlHelper.connect();
+            
 
             if(req.query.taxonomy !== undefined){
+
+                var conn = MysqlHelper.connect();
 
                 conn.query('SELECT * FROM terms t WHERE t.taxonomy=? OR slug=? AND t.status=1 LIMIT 1', 
                     [
@@ -53,7 +55,7 @@ export default class PageModel {
                         } else {
                             if(result.length){
                                 result = result[0];
-                                this.get_children(conn,result.id).then((children)=>{
+                                this.get_children(result.id).then((children)=>{
                                     result.children = children;
                                     result.options = JSON.parse(result.options);
                                     resolve({status:true, page: result});
@@ -62,25 +64,32 @@ export default class PageModel {
                                 resolve({status:false})
                             }
                         }
+
+                        //conn.end();
                     }
                 );
+
+                conn.end();
 
             }
         })
     };
 
 
-    get_children(conn, taxonomy_id){
+    get_children(taxonomy_id){
         return new Promise((resolve)=>{
             if(!taxonomy_id){
                 resolve(null);
             } else {
+
+                var conn = MysqlHelper.connect();
+
                 conn.query('SELECT * FROM terms t WHERE t.parent_id = ? AND t.status=1', 
                     [
                         taxonomy_id
 
                     ], (err, result) => {
-                        console.log(result)
+
                         if(result === undefined){
                             resolve([]);
                         } else {
@@ -102,6 +111,8 @@ export default class PageModel {
                         }
                     }
                 );
+
+                conn.end();
             }
         })
                

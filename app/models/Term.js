@@ -29,23 +29,28 @@ export default class TermModel {
 
         return new Promise((resolve)=>{
 
-            var conn = MysqlHelper.connect();
+            
 
             if(req.query.token === undefined){
+
+                var conn = MysqlHelper.connect();
 
                 conn.query('SELECT * FROM terms t  WHERE t.status = 1 AND groupkey="API"', 
                     [
                         
                     ], (err, result) => {
-                        console.log(result)
+                        
                         if(result.length){
                             resolve({status:true, items: result});
                         } else {
                             resolve({status:false})
                         }
 
+                        
                     }
                 );
+
+                conn.end();
 
             }
 
